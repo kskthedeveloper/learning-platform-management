@@ -11,11 +11,13 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFirestore} from '@angular/fire/firestore';
+import { ExerciseMenuComponent } from './component/exercise-menu/exercise-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ExerciseListComponent
+    ExerciseListComponent,
+    ExerciseMenuComponent
   ],
   imports: [
     BrowserModule,
