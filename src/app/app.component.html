@@ -1,10 +1,12 @@
 <nb-layout>
-  <nb-layout-header fixed>Company Name</nb-layout-header>
+  <nb-layout-header fixed>Dashboard Management</nb-layout-header>
 
-  <nb-sidebar>For menu</nb-sidebar>
+  <nb-sidebar>
+      <nb-menu [items]="items"></nb-menu>
+  </nb-sidebar>
 
   <nb-layout-column>
-<!--    <app-exercise-list></app-exercise-list>-->
-    <app-exercise-menu></app-exercise-menu>
+<!--   <app-exercise-list></app-exercise-list>-->
+    <router-outlet></router-outlet>
   </nb-layout-column>
 </nb-layout>

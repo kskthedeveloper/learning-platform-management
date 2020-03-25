@@ -1,2 +1,7 @@
-<p>exercise-menu works!</p>
-<button *ngFor="let button of buttons" (click)="goToDetail(button)"> {{button}}</button>
+<button (click)="addNewUnit()">Add New Unit</button>
+
+<br>
+
+<button *ngFor="let button of buttons" (click)="goToDetail(button)">
+  {{button}}
+</button>

@@ -1,0 +1,31 @@
+<nb-card>
+  <nb-card-header>
+    {{exercise.id}}
+  </nb-card-header>
+  <nb-card-body>
+    <div>{{exercise.audio}}</div>
+
+    <div>{{exercise.audioQuestion}}</div>
+
+    <div>
+      <span *ngFor="let checkWord of exercise.check">
+        {{checkWord}}
+      </span>
+    </div>
+
+    <div>
+      <span *ngFor="let givenWord of exercise.givenWords">
+        <span *ngIf="givenWord != ''">{{givenWord}} </span>
+        <span *ngIf="givenWord == ''">____ </span>
+      </span>
+    </div>
+
+    <div>{{exercise.img}}</div>
+
+    <div>
+      <span *ngFor="let givenWord of exercise.givenWords">
+        {{givenWord}}
+      </span>
+    </div>
+  </nb-card-body>
+</nb-card>

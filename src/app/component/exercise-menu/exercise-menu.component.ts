@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ExerciseMenuService} from '../../service/exercise-menu.service';
 import {Exercise} from "../../models/exercise.model";
 import {ExerciseService} from "../../service/exercise.service";
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-exercise-menu',
@@ -14,7 +15,9 @@ export class ExerciseMenuComponent implements OnInit {
   map: Map<string, Exercise[]>;
   buttons: string[] = new Array();
 
-  constructor(private exerciseService: ExerciseService, private exerciseMenuService: ExerciseMenuService) { }
+  constructor(private exerciseService: ExerciseService,
+              private exerciseMenuService: ExerciseMenuService,
+              private router: Router) { }
 
   ngOnInit() {
     this.exerciseService.getExercises().subscribe(data => {
@@ -30,11 +33,15 @@ export class ExerciseMenuComponent implements OnInit {
       this.map = this.exerciseMenuService.categorizeExerciseByUnit(this.exercises);
       console.log(this.map.get('01'));
 
-      for(let key of this.map.keys()) {
+      for (const key of this.map.keys()) {
         this.buttons.push(key);
       }
 
     });
+  }
+
+  addNewUnit() {
+    this.router.navigate(['/new-form']);
   }
 
   goToDetail(button: any) {

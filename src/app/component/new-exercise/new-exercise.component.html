@@ -1,0 +1,12 @@
+<app-exercise></app-exercise>
+<div *ngFor="let exerciseForm of exerciseForms">
+  <label *ngIf="!exerciseForm.controls.isEdit.value">{{exerciseForm.controls.id.value}}</label>
+  <button *ngIf="!exerciseForm.controls.isEdit.value" (click)="toggle(exerciseForm)">Edit</button>
+  <button *ngIf="exerciseForm.controls.isEdit.value" (click)="toggle(exerciseForm)">Close</button>
+  <form *ngIf="exerciseForm.controls.isEdit.value" [formGroup]="exerciseForm">
+    <input formControlName="id">
+    <input formControlName="audio">
+    <input formControlName="check">
+    <input formControlName="givenWords">
+  </form>
+</div>
