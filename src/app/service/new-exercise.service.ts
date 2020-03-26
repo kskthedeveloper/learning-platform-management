@@ -17,7 +17,18 @@ export class NewExerciseService {
     // need to refactor it
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 10; j++) {
-          this.exercises.push(new Exercise(this.generateExerciseId(1, i + 1, j + 1)));
+          const myExercise =  new Exercise(this.generateExerciseId(1, i + 1, j + 1), false);
+          myExercise.audio = 'Audio';
+          myExercise.audioQuestion = 'AudioQuestion';
+          // myExercise.check = ['this', 'is', 'a', 'test'];
+          myExercise.check = 'check';
+          // myExercise.givenWords = ['this', '', 'a', 'test'];
+          myExercise.givenWords = 'givenWords';
+          myExercise.img = 'img';
+          // myExercise.questions = ['this', 'is', 'a', 'test'];
+          myExercise.questions = 'question';
+
+        this.exercises.push(myExercise);
       }
     }
   }

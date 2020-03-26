@@ -1,10 +1,10 @@
 export class Exercise {
   audio: string;
   audioQuestion: string;
-  check: string[];
-  givenWords: string[];
+  check: string;
+  givenWords: string;
   img: string;
-  questions: string[];
+  questions: string;
 
-  constructor(public id: string) {}
+  constructor(public id: string, public isEdit: boolean) {}
 }

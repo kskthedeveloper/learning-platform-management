@@ -35,7 +35,7 @@ export class NewExerciseComponent implements OnInit {
       givenWords: exercise.givenWords ?? '',
       img: exercise.img ?? '',
       questions: exercise.questions ?? '',
-      isEdit: false
+      isEdit: exercise.isEdit ?? false
     });
   }
 
@@ -43,5 +43,11 @@ export class NewExerciseComponent implements OnInit {
     console.log(exerciseForm.controls.isEdit);
     exerciseForm.controls.isEdit.setValue(!exerciseForm.controls.isEdit.value);
   }
+
+  onEditEvent(event, exercise, exerciseForm) {
+    exercise.isEdit = event;
+    exerciseForm.controls.isEdit.setValue(event);
+  }
+
 
 }

@@ -21,6 +21,7 @@ export class ExerciseListComponent implements OnInit {
         const myData: any = e.payload.doc.data();
         return {
           id: idData,
+          isEdit: false,
           ...myData
         } as Exercise;
       });
