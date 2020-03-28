@@ -49,5 +49,10 @@ export class NewExerciseComponent implements OnInit {
     exerciseForm.controls.isEdit.setValue(event);
   }
 
+  onEdit(exercise: Exercise, exerciseForm) {
+    exercise.isEdit = exercise.isEdit;
+    exerciseForm.controls.isEdit.setValue(!exerciseForm.controls.isEdit.value);
+  }
+
 
 }

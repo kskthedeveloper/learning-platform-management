@@ -1,7 +1,44 @@
 <div *ngFor="let exerciseForm of exerciseForms; let i = index">
-  <app-exercise *ngIf="!exerciseForm.controls.isEdit.value"
-                (onEdit)="onEditEvent($event, exercises[i], exerciseForm)"
-                [exercise]="exercises[i]"></app-exercise>
+<!--  <app-exercise *ngIf="!exerciseForm.controls.isEdit.value"-->
+<!--                (onEdit)="onEditEvent($event, exercises[i], exerciseForm)"-->
+<!--                [exercise]="exercises[i]"></app-exercise>-->
+
+  <div *ngIf="!exerciseForm.controls.isEdit.value">
+  <nb-card>
+    <nb-card-header>
+      {{exerciseForm.controls.id.value}}
+      <button nbButton outline status="primary" (click)="onEdit(exercises[i], exerciseForm)"><nb-icon icon="edit-2-outline"></nb-icon></button>
+    </nb-card-header>
+    <nb-card-body>
+      <div>{{exerciseForm.controls.audio.value}}</div>
+
+      <div>{{exerciseForm.controls.questions.value}}</div>
+
+      <div>
+        {{exerciseForm.controls.check.value}}
+        <!--      <span *ngFor="let checkWord of exercise.check">-->
+        <!--        {{checkWord}}-->
+        <!--      </span>-->
+      </div>
+
+      <div>
+        <!--      <span *ngFor="let givenWord of exercise.givenWords">-->
+        <!--        <span *ngIf="givenWord != ''">{{givenWord}} </span>-->
+        <!--        <span *ngIf="givenWord == ''">____ </span>-->
+        <!--      </span>-->
+      </div>
+
+      <div>{{exerciseForm.controls.img.value}}</div>
+
+      <div>
+        {{exerciseForm.controls.questions.value}}
+        <!--      <span *ngFor="let givenWord of exercise.givenWords">-->
+        <!--        {{givenWord}}-->
+        <!--      </span>-->
+      </div>
+    </nb-card-body>
+  </nb-card>
+  </div>
 
   <div *ngIf="exerciseForm.controls.isEdit.value">
     <nb-card>
