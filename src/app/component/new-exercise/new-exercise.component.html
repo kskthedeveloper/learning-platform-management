@@ -134,13 +134,13 @@
             <label style="margin: 10px; width: 100px; display: inline-block;">Question</label>
 
             <div *ngFor="let question of questionList(exerciseForm).controls; let i = index" class="dy-cap">
-              <input nbInput type="text" [formControlName]="i" style="margin: 10px" class="dy-input">
-              <button nbButton ghost shape="round" class="remove-btn" (click)="removeQuestion(exerciseForm, i)" status="danger" >
-                <nb-icon icon="close-circle-outline"></nb-icon>
+              <input nbInput type="text" [formControlName]="i" style="margin: 10px" class="dy-input" disabled>
+              <button nbButton ghost shape="round" class="remove-btn" (click)="clearQuestion(exerciseForm, i)" status="warning" >
+                <nb-icon icon="slash-outline"></nb-icon>
               </button>
             </div>
 
-            <button nbButton (click)="addQuestion(exerciseForm)" style="margin: 10px">
+            <button nbButton (click)="addQuestion(exerciseForm)" style="margin: 10px" [disabled]="true">
               <nb-icon icon="plus-outline"></nb-icon>
             </button>
           </div>

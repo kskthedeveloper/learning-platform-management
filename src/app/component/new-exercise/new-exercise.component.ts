@@ -53,14 +53,24 @@ export class NewExerciseComponent implements OnInit {
           const myData: any = exercise.payload.data();
           this.exercises.push({isEdit: false, ...myData} as Exercise);
           this.exerciseForms.push(this.generateForm({isEdit: false, ...myData} as Exercise));
+          this.onChanges();
         });
       });
     });
+
     // console.log(this.exerciseForms[0].controls);
   }
 
+  onChanges(): void {
+    this.exerciseForms.forEach(exerciseForm => {
+      exerciseForm.get('check').valueChanges.subscribe(val => {
+        exerciseForm.controls.questions.setValue(val);
+      });
+    });
+  }
+
   generateForm(exercise: Exercise): FormGroup {
-    return this.fb.group({
+    const fbGroup = this.fb.group({
       id: exercise.id,
       audio: exercise.audio ?? '',
       audioQuestion: exercise.audioQuestion ?? '',
@@ -76,6 +86,13 @@ export class NewExerciseComponent implements OnInit {
       ]),
       isEdit: exercise.isEdit ?? false
     });
+
+    // fbGroup.valueChanges.subscribe(val => {
+    //   console.log(fbGroup.controls);
+    //   // fbGroup.controls.questions.setValue(val);
+    // });
+
+    return fbGroup;
   }
 
   checkList(exerciseForm) {
@@ -83,11 +100,13 @@ export class NewExerciseComponent implements OnInit {
   }
 
   addCheck(exerciseForm) {
+    this.addQuestion(exerciseForm);
     this.checkList(exerciseForm)
-        .push(this.fb.control(''));
+        .push(this.fb.control('', Validators.required));
   }
 
   removeCheck(exerciseForm: FormGroup, index: number) {
+    this.removeQuestion(exerciseForm, index);
     this.checkList(exerciseForm).removeAt(index);
   }
 
@@ -111,7 +130,7 @@ export class NewExerciseComponent implements OnInit {
 
   addGivenWord(exerciseForm) {
     this.givenWordList(exerciseForm)
-        .push(this.fb.control(''));
+        .push(this.fb.control('', Validators.required));
   }
 
   removeGivenWord(exerciseForm: FormGroup, index: number) {
@@ -129,6 +148,11 @@ export class NewExerciseComponent implements OnInit {
 
   removeQuestion(exerciseForm: FormGroup, index: number) {
     this.questionList(exerciseForm).removeAt(index);
+  }
+
+  clearQuestion(exerciseForm: FormGroup, index: number) {
+    exerciseForm.controls.questions.markAsDirty();
+    this.questionList(exerciseForm).at(index).setValue('');
   }
 
   toggle(exerciseForm: any) {
