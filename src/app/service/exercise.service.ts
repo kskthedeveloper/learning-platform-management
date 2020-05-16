@@ -15,8 +15,12 @@ export class ExerciseService {
     return this.firestore.collection('question').snapshotChanges();
   }
 
-  getExerciseById(id: string) {
-    return this.firestore.collection('question').doc(id).valueChanges();
+  getExerciseById(exerciseId: string, unitId: string) {
+    return this.firestore.collection('englishQuestion').doc(exerciseId).collection(unitId).snapshotChanges();
+  }
+
+  getQuestionById(exerciseId: string, unitId: string, questionId: string) {
+    return this.firestore.collection('englishQuestion').doc(exerciseId).collection(unitId).doc(questionId).snapshotChanges();
   }
 
 }

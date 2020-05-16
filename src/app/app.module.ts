@@ -4,7 +4,16 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {NbThemeModule, NbLayoutModule, NbSidebarModule, NbCardModule, NbMenuModule, NbIconModule, NbButtonModule} from '@nebular/theme';
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbSidebarModule,
+  NbCardModule,
+  NbMenuModule,
+  NbIconModule,
+  NbButtonModule,
+  NbInputModule
+} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ExerciseListComponent } from './component/exercise-list/exercise-list.component';
 import {AngularFireModule} from '@angular/fire';
@@ -15,6 +24,8 @@ import { ExerciseMenuComponent } from './component/exercise-menu/exercise-menu.c
 import { NewExerciseComponent } from './component/new-exercise/new-exercise.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ExerciseComponent } from './component/exercise/exercise.component';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import { UnitComponent } from './component/unit/unit.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +33,8 @@ import { ExerciseComponent } from './component/exercise/exercise.component';
     ExerciseListComponent,
     ExerciseMenuComponent,
     NewExerciseComponent,
-    ExerciseComponent
+    ExerciseComponent,
+    UnitComponent
   ],
   imports: [
     NbMenuModule.forRoot(),
@@ -39,7 +51,8 @@ import { ExerciseComponent } from './component/exercise/exercise.component';
     AngularFireDatabaseModule,
     NbCardModule,
     NbMenuModule,
-    FormsModule, ReactiveFormsModule, NbIconModule, NbButtonModule
+    FormsModule, ReactiveFormsModule, NbIconModule, NbButtonModule, NbInputModule,
+    AngularFireStorageModule
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent]

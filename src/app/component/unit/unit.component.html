@@ -1,0 +1,29 @@
+<h1>Exercise: {{exerciseId}}</h1>
+
+<button (click)="selectUnit('01')" [ngStyle]="{'background-color': ( selectedUnit =='01') ? '#ADD8E6' : '#ffffff'}">01</button>
+<button (click)="selectUnit('02')" [ngStyle]="{'background-color': ( selectedUnit =='02') ? '#ADD8E6' : '#ffffff'}">02</button>
+<button (click)="selectUnit('03')" [ngStyle]="{'background-color': ( selectedUnit =='03') ? '#ADD8E6' : '#ffffff'}">03</button>
+<button (click)="selectUnit('04')" [ngStyle]="{'background-color': ( selectedUnit =='04') ? '#ADD8E6' : '#ffffff'}">04</button>
+
+<br>
+
+<!-- TODO: to fix this, to re init the child on parent onclick-->
+<!--<div *ngIf="selectedUnit">-->
+<!--  <app-new-exercise [unitId]="selectedUnit"></app-new-exercise>-->
+<!--</div>-->
+
+<div *ngIf="selectedUnit == '01'">
+  <app-new-exercise [exerciseId]="exerciseId" [unitId]="selectedUnit"></app-new-exercise>
+</div>
+
+<div *ngIf="selectedUnit == '02'">
+  <app-new-exercise [exerciseId]="exerciseId" [unitId]="selectedUnit"></app-new-exercise>
+</div>
+
+<div *ngIf="selectedUnit == '03'">
+  <app-new-exercise [exerciseId]="exerciseId" [unitId]="selectedUnit"></app-new-exercise>
+</div>
+
+<div *ngIf="selectedUnit == '04'">
+  <app-new-exercise [exerciseId]="exerciseId" [unitId]="selectedUnit"></app-new-exercise>
+</div>

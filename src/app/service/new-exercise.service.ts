@@ -14,23 +14,16 @@ export class NewExerciseService {
 
 
   createNewExercises() {
-    // need to refactor it
-    for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 10; j++) {
-          const myExercise =  new Exercise(this.generateExerciseId(1, i + 1, j + 1), false);
+          const myExercise =  new Exercise(this.generateExerciseId(1, 1, j + 1), false);
           myExercise.audio = 'Audio';
           myExercise.audioQuestion = 'AudioQuestion';
-          // myExercise.check = ['this', 'is', 'a', 'test'];
-          myExercise.check = 'check';
-          // myExercise.givenWords = ['this', '', 'a', 'test'];
-          myExercise.givenWords = 'givenWords';
+          myExercise.check = ['this', 'is', 'a', 'test'];
+          myExercise.givenWords = ['given', 'word', 'given', 'word', 'given', 'word'];
           myExercise.img = 'img';
-          // myExercise.questions = ['this', 'is', 'a', 'test'];
-          myExercise.questions = 'question';
-
-        this.exercises.push(myExercise);
+          myExercise.questions = ['this', 'is', '', 'test'];
+          this.exercises.push(myExercise);
       }
-    }
   }
 
   getStringNumber(i: number): string {
