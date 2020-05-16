@@ -52,7 +52,7 @@ export class NewExerciseComponent implements OnInit {
 
   loadData() {
     this.exerciseService.getExerciseById(this.exerciseId, this.unitId).subscribe( data => {
-      // this.exercises = [];
+      this.exercises = [];
       this.exerciseForms = [];
       data.forEach( question => {
         this.exerciseService.getQuestionById(this.exerciseId, this.unitId, question.payload.doc.id).subscribe(exercise => {
