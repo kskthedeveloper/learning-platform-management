@@ -88,20 +88,20 @@
           <input style="margin: 10px" nbInput fullWidth placeholder="Primary" formControlName="id">
 
           <label>Audio: </label>
-          <input style="margin: 10px" nbInput fullWidth formControlName="audio">
           <input type="file" (change)="uploadAudio($event, exerciseForm)"/>
           <div>{{ uploadAudioPercent | async }}</div>
+          <input style="margin: 10px" nbInput fullWidth formControlName="audio">
 
           <label>AudioQuestion: </label>
-          <input style="margin: 10px" nbInput fullWidth formControlName="audioQuestion">
           <input type="file" (change)="uploadAudioQuestion($event, exerciseForm)"/>
           <div>{{ uploadAudioQuestionPercent | async }}</div>
+          <input style="margin: 10px" nbInput fullWidth formControlName="audioQuestion">
 
           <div style="margin: 10px" formArrayName="check">
             <label style="margin: 10px; width: 100px; display: inline-block;">To Check: </label>
 
             <div *ngFor="let check of checkList(exerciseForm).controls; let i = index" class="dy-cap">
-              <input nbInput type="text" [formControlName]="i" style="margin: 10px" class="dy-input">
+              <input nbInput type="text" [formControlName]="i" style="margin: 10px" class="dy-input" status="{{check.invalid && check.errors.required ? 'danger' : ''}}">
               <button nbButton ghost shape="round" class="remove-btn" (click)="removeCheck(exerciseForm, i)"  status="danger" >
                 <nb-icon icon="close-circle-outline"></nb-icon>
               </button>
@@ -117,10 +117,11 @@
             <label style="margin: 10px; width: 100px; display: inline-block;">Given Words: </label>
 
             <div *ngFor="let given of givenWordList(exerciseForm).controls; let i = index" class="dy-cap">
-              <input nbInput type="text" [formControlName]="i" style="margin: 10px" class="dy-input">
+              <input nbInput type="text" [formControlName]="i" style="margin: 10px" class="dy-input" status="{{given.invalid && given.errors.required ? 'danger' : ''}}" >
               <button nbButton ghost shape="round" class="remove-btn" (click)="removeGivenWord(exerciseForm, i)"  status="danger" >
                 <nb-icon icon="close-circle-outline"></nb-icon>
               </button>
+
             </div>
 
             <button nbButton (click)="addGivenWord(exerciseForm)" style="margin: 10px">
@@ -145,9 +146,9 @@
           </div>
 
           <label>Image: </label>
-          <input style="margin: 10px" nbInput fullWidth formControlName="img" disabled>
           <input type="file" (change)="uploadImage($event, exerciseForm)"/>
           <div>{{ uploadPercent | async }}</div>
+          <input style="margin: 10px" nbInput fullWidth formControlName="img" disabled>
 
         </form>
       </nb-card-body>

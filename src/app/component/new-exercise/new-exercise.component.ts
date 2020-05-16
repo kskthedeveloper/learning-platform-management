@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NewExerciseService} from '../../service/new-exercise.service';
 import {Exercise} from '../../models/exercise.model';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {element} from 'protractor';
 import {FileUploadService} from '../../service/file-upload.service';
 import {Observable} from 'rxjs';
@@ -65,14 +65,14 @@ export class NewExerciseComponent implements OnInit {
       audio: exercise.audio ?? '',
       audioQuestion: exercise.audioQuestion ?? '',
       check: this.fb.array([
-        ...this.bindList(exercise.check)
+        ...this.bindList(exercise.check, true)
       ]),
       givenWords: this.fb.array([
-        ...this.bindList(exercise.givenWords)
+        ...this.bindList(exercise.givenWords, true)
       ]),
       img: exercise.img ?? '',
       questions: this.fb.array([
-        ...this.bindList(exercise.questions)
+        ...this.bindList(exercise.questions, false)
       ]),
       isEdit: exercise.isEdit ?? false
     });
@@ -91,11 +91,15 @@ export class NewExerciseComponent implements OnInit {
     this.checkList(exerciseForm).removeAt(index);
   }
 
-  bindList(elements: string[]): FormControl[] {
+  bindList(elements: string[], isRequired: boolean): FormControl[] {
     const formControls = new Array();
 
     for (const ele of elements) {
-      formControls.push(this.fb.control(ele));
+      if (isRequired) {
+        formControls.push(this.fb.control(ele, Validators.required));
+      } else {
+        formControls.push(this.fb.control(ele));
+      }
     }
 
     return formControls;
@@ -200,6 +204,8 @@ export class NewExerciseComponent implements OnInit {
   }
 
   saveExercise(exerciseForm: FormGroup) {
+    if (exerciseForm.status === 'INVALID') { return; }
+
     const toSave: Exercise = exerciseForm.value;
     delete toSave.isEdit;
     this.loading = true;
