@@ -87,6 +87,10 @@ export class NewExerciseComponent implements OnInit {
         .push(this.fb.control(''));
   }
 
+  removeCheck(exerciseForm: FormGroup, index: number) {
+    this.checkList(exerciseForm).removeAt(index);
+  }
+
   bindList(elements: string[]): FormControl[] {
     const formControls = new Array();
 
@@ -106,6 +110,10 @@ export class NewExerciseComponent implements OnInit {
         .push(this.fb.control(''));
   }
 
+  removeGivenWord(exerciseForm: FormGroup, index: number) {
+    this.givenWordList(exerciseForm).removeAt(index);
+  }
+
   questionList(exerciseForm) {
     return exerciseForm.get('questions') as FormArray;
   }
@@ -113,6 +121,10 @@ export class NewExerciseComponent implements OnInit {
   addQuestion(exerciseForm) {
     this.questionList(exerciseForm)
       .push(this.fb.control(''));
+  }
+
+  removeQuestion(exerciseForm: FormGroup, index: number) {
+    this.questionList(exerciseForm).removeAt(index);
   }
 
   toggle(exerciseForm: any) {
@@ -199,6 +211,7 @@ export class NewExerciseComponent implements OnInit {
     });
 
   }
+
 
 
 }

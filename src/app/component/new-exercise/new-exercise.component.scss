@@ -76,3 +76,19 @@
   display: inline-block;
   width: 70%;
 }
+
+.remove-btn {
+  display: none;
+}
+
+.dy-input:hover + .remove-btn, .remove-btn:hover {
+  display: inline-block;
+  float: left;
+  position: absolute;
+  right: 0;
+}
+
+.dy-cap {
+  display: inline-block;
+  position: relative;
+}
