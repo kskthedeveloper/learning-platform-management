@@ -5,6 +5,7 @@ import {ExerciseService} from '../../service/exercise.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DocumentCreatorService} from '../../service/document-creator.service';
 import {CollectionService} from '../../service/collection.service';
+import {NewExerciseService} from '../../service/new-exercise.service';
 
 @Component({
   selector: 'app-exercise-menu',
@@ -17,9 +18,12 @@ export class ExerciseMenuComponent implements OnInit {
   map: Map<string, Exercise[]>;
   buttons: string[] = new Array();
   size: number;
+  isSaving = false;
+  percentage = 0;
 
   constructor(private exerciseService: ExerciseService,
               private exerciseMenuService: ExerciseMenuService,
+              private newExerciseService: NewExerciseService,
               private documentCreatorService: DocumentCreatorService,
               private collectionService: CollectionService,
               private router: Router) { }
@@ -28,9 +32,8 @@ export class ExerciseMenuComponent implements OnInit {
     // this.documentCreatorService.onSubmit();
 
     this.collectionService.getCollection('englishQuestion').subscribe( docData => {
-      console.log(docData);
-      for (let i = 1; i <= docData.length; i++) {
-      }
+      this.buttons = [];
+      this.size =  docData.length;
 
       docData.forEach(doc => {
         this.buttons.push(doc.payload.doc.id);
@@ -64,11 +67,29 @@ export class ExerciseMenuComponent implements OnInit {
   }
 
   addNewUnit() {
-    this.router.navigate(['/new-form']);
+    this.isSaving = true;
+    let counter = 1;
+    console.log('creating new question');
+    const questionId = this.size + 1;
+
+    this.newExerciseService.createNewExercises(questionId);
+
+    this.newExerciseService.exercises.forEach(exercise => {
+      this.documentCreatorService.createNewExercise(exercise).then( res => {
+        counter++;
+        this.percentage = Math.round((counter / 40) * 100);
+        if (exercise.id === questionId + '0410') {
+          // this.buttons.push((this.size + 1) + '');
+          this.buttons = [];
+          this.documentCreatorService.setAField(exercise);
+          this.isSaving = false;
+        }
+      });
+    });
   }
 
   goToDetail(button: any) {
     console.log(button);
-    this.router.navigate(['/unit', button]);
+    this.router.navigate(['/unit', button]).then(r => console.log(r));
   }
 }

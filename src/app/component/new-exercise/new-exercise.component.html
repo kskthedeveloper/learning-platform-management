@@ -16,7 +16,7 @@
           <div class="question-title">Audio:</div>
           <div class="question-body">
 <!--            {{exerciseForm.controls.audio.value}}-->
-            <audio controls src="{{exerciseForm.controls.audio.value}}"></audio>
+            <audio *ngIf="exerciseForm.controls.audio.value" controls src="{{exerciseForm.controls.audio.value}}"></audio>
           </div>
           <hr>
         </div>

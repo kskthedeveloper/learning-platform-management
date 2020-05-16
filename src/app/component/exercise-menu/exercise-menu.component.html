@@ -1,6 +1,8 @@
 <button (click)="addNewUnit()">Add New Unit</button>
 
 <br>
+<nb-progress-bar *ngIf="isSaving" [value]="percentage" [displayValue]="true"></nb-progress-bar>
+<br>
 
 <button *ngFor="let button of buttons" (click)="goToDetail(button)">
   {{button}}

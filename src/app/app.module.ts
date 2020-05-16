@@ -12,7 +12,7 @@ import {
   NbMenuModule,
   NbIconModule,
   NbButtonModule,
-  NbInputModule, NbSpinnerModule
+  NbInputModule, NbSpinnerModule, NbProgressBarModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ExerciseListComponent } from './component/exercise-list/exercise-list.component';
@@ -52,6 +52,7 @@ import { UnitComponent } from './component/unit/unit.component';
     NbCardModule,
     NbMenuModule,
     NbSpinnerModule,
+    NbProgressBarModule,
     FormsModule, ReactiveFormsModule, NbIconModule, NbButtonModule, NbInputModule,
     AngularFireStorageModule
   ],

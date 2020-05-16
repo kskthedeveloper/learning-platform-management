@@ -35,8 +35,36 @@ export class DocumentCreatorService {
       .doc(exerciseNo)
       .collection(unitNo)
       .doc(questionNo)
-      .update(exercise);
+      .set(exercise);
   }
+
+  createNewExercise(exercise: Exercise) {
+
+    const exerciseNo = exercise.id.substr(0, 2);
+    const unitNo = exercise.id.substr(2, 2);
+    const questionNo = exercise.id.substr(4, 2);
+
+    return this.firestore
+      .collection('englishQuestion')
+      .doc(exerciseNo)
+      .collection(unitNo)
+      .doc(questionNo)
+      .set(Object.assign({}, exercise));
+  }
+
+  setAField(exercise: Exercise) {
+    const exerciseNo = exercise.id.substr(0, 2);
+    const unitNo = exercise.id.substr(2, 2);
+    const questionNo = exercise.id.substr(4, 2);
+
+    return this.firestore
+      .collection('englishQuestion')
+      .doc(exerciseNo)
+      .set({test: ''}) .then(data => {
+        console.log(data);
+       });
+  }
+
 
   onSubmit(exercise: Exercise) {
     this.createExercise(exercise).then( res => {
