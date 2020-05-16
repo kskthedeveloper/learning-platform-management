@@ -8,6 +8,8 @@ import {Observable} from 'rxjs';
 import {finalize} from 'rxjs/operators';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {ExerciseService} from '../../service/exercise.service';
+import {CollectionService} from '../../service/collection.service';
+import {DocumentCreatorService} from '../../service/document-creator.service';
 
 @Component({
   selector: 'app-new-exercise',
@@ -27,6 +29,7 @@ export class NewExerciseComponent implements OnInit {
   uploadAudioQuestionPercent: Observable<number>;
   downloadURL: Observable<string>;
   fileUrl: Observable<string | null>;
+  loading = false;
 
   filePath: string;
 
@@ -35,6 +38,7 @@ export class NewExerciseComponent implements OnInit {
               private exerciseService: ExerciseService,
               private fb: FormBuilder,
               private fileUploadService: FileUploadService,
+              private documentCreatorService: DocumentCreatorService,
               private storage: AngularFireStorage
   ) {
   }
@@ -181,6 +185,19 @@ export class NewExerciseComponent implements OnInit {
   downloadFile(filePath: string, fileName: string) {
     const ref = this.storage.ref(filePath + '/' + fileName);
     this.fileUrl = ref.getDownloadURL();
+  }
+
+  saveExercise(exerciseForm: FormGroup) {
+    const toSave: Exercise = exerciseForm.value;
+    delete toSave.isEdit;
+    this.loading = true;
+
+
+    this.documentCreatorService.createExercise(toSave).then(res => {
+      this.loading = false;
+      this.toggle(exerciseForm);
+    });
+
   }
 
 

@@ -69,11 +69,16 @@
   </div>
 
   <div *ngIf="exerciseForm.controls.isEdit.value">
-    <nb-card>
+    <nb-card  [nbSpinner]="loading" nbSpinnerStatus="primary">
       <nb-card-header>
         {{exercises[i].id}}
+        &nbsp;
         <button nbButton outline status="danger" (click)="toggle(exerciseForm)">
           <nb-icon icon="close-circle-outline"></nb-icon>
+        </button>
+        &nbsp;
+        <button *ngIf="exerciseForm.dirty" nbButton outline status="success" (click)="saveExercise(exerciseForm)">
+          <nb-icon icon="checkmark-outline"></nb-icon>
         </button>
       </nb-card-header>
 
