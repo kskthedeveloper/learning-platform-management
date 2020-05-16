@@ -46,8 +46,14 @@ export class NewExerciseComponent implements OnInit {
   ngOnInit(): void {
     // get exercise from firebase
 
+    this.loadData();
+    // console.log(this.exerciseForms[0].controls);
+  }
 
+  loadData() {
     this.exerciseService.getExerciseById(this.exerciseId, this.unitId).subscribe( data => {
+      // this.exercises = [];
+      this.exerciseForms = [];
       data.forEach( question => {
         this.exerciseService.getQuestionById(this.exerciseId, this.unitId, question.payload.doc.id).subscribe(exercise => {
           const myData: any = exercise.payload.data();
@@ -57,8 +63,6 @@ export class NewExerciseComponent implements OnInit {
         });
       });
     });
-
-    // console.log(this.exerciseForms[0].controls);
   }
 
   onChanges(): void {
@@ -238,6 +242,7 @@ export class NewExerciseComponent implements OnInit {
     this.documentCreatorService.createExercise(toSave).then(res => {
       this.loading = false;
       this.toggle(exerciseForm);
+      this.loadData();
     });
 
   }
